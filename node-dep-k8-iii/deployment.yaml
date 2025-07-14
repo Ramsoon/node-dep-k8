@@ -1,16 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: story-Deployment
+  name: story-deployment
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: story
   template:
+    metadata:
+      labels:
+        app: story
     spec:
       containers:
         - name: story
           image: successtech/k8-node:1
           volumeMounts: 
-            - mounthpath: /app/story
+            - mountPath: /app/story
               name: story-volume
       volumes:
         - name: story-volume
@@ -18,4 +24,29 @@ spec:
           hostPath:
             path: /data
             type: DirectoryOrCreate # create if dir doesnt exist
-            
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+    spec:
+      containers:
+        - name: story
+          image: successtech/k8-node:1
+          volumeMounts: 
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          # emptyDir: {}
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate # create if dir doesnt exist

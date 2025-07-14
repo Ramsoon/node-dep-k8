@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-Deployment
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: story
+          image: successtech/k8-node:1
+          volumeMounts: 
+            - mounthpath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          # emptyDir: {}
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate # create if dir doesnt exist
+            

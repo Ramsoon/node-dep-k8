@@ -24,6 +24,6 @@ spec:
           # hostPath:
           #   path: /data
           #   type: DirectoryOrCreate # create if dir doesnt exist
-          PersistentVolumeClaim:
+          persistentVolumeClaim:
             claimName: host-pvc
 
